@@ -1,4 +1,5 @@
 from src.quality import run_quality_checks
+import pandas as pd
 
 def transform(df, config, logger):
     logger.info("Starting transformation")
@@ -12,6 +13,7 @@ def transform(df, config, logger):
     df["Embarked"] = df["Embarked"].fillna("Unknown")
 
     df["is_child"] = df["Age"] < 12
+    df["processed_at"] = pd.Timestamp.now()
 
     df.columns = [c.lower() for c in df.columns]
 

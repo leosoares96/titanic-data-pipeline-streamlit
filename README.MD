@@ -1,148 +1,63 @@
-# Titanic Data Pipeline with Streamlit
+# Titanic Data Pipeline com Streamlit
 
-## Overview
+## Visão geral
 
-This project implements a minimal end-to-end data pipeline using the Titanic dataset.
-It demonstrates core data engineering concepts such as data ingestion, transformation, quality checks, storage, and visualization — all running locally.
+Projeto demonstrativo que implementa um pipeline local e reprodutível usando o dataset Titanic. Cobre ingestão, transformação, checagem de qualidade, persistência e visualização com Streamlit.
 
-The goal is to simulate a modern data pipeline architecture in a simple and reproducible way.
+## Funcionalidades
 
----
+- Extração do CSV público do Titanic
+- Limpeza e engenharia de features com Pandas
+- Validações básicas de qualidade de dados
+- Persistência em Parquet e SQLite para análises
+- Dashboard interativo com Streamlit e Plotly
 
-## Architecture
+## Arquitetura (camadas)
 
-The pipeline follows a layered approach:
+- Ingestão: scripts em `src/extract.py` que baixam/salvam dados brutos em `data/raw/`
+- Raw: snapshots imutáveis em CSV em `data/raw/`
+- Processamento: limpeza e transformações em `src/transform.py`
+- Qualidade: validações em `src/quality.py`
+- Persistência: Parquet + gravação em SQLite via `src/load.py`
+- Serving: dashboard em `app/app.py` (Streamlit)
 
-- **Ingestion Layer**: Extracts raw data from a public source
-- **Processing Layer**: Cleans and transforms data
-- **Data Quality Layer**: Validates dataset integrity
-- **Storage Layer**: Persists data in SQLite
-- **Serving Layer**: Provides visualization via Streamlit
+Fluxo: Data Source → src.extract → data/raw → src.transform → src.quality → src.load → SQLite → Streamlit
 
----
+## Como executar (Windows)
 
-## Data Flow
+1. Criar e ativar ambiente virtual:
 
-```
-Data Source (CSV)
-        ↓
-     Extract
-        ↓
-   Raw Layer (CSV)
-        ↓
-   Transform + Quality Checks
-        ↓
-Processed Data (Parquet)
-        ↓
-      SQLite
-        ↓
-    Streamlit App
-```
+   - python -m venv venv
+   - venv\Scripts\activate
 
----
+2. Instalar dependências:
 
-## Tech Stack
+   - python -m pip install -r requirements.txt
 
-- Python
-- Pandas
-- SQLite
-- Streamlit
-- PyArrow
-- plotly
+3. Executar pipeline (gera Parquet/SQLite):
 
----
+   - python main.py
 
-## Project Structure
+4. Rodar o dashboard:
+   - streamlit run app/app.py
 
-```
-src/
-├── extract.py
-├── transform.py
-├── load.py
-├── quality.py
-└── utils/
-    ├── config.py
-    └── logger.py
-```
+## Estrutura do projeto (resumo)
 
----
+- app/app.py — Streamlit dashboard
+- src/extract.py — ingestão
+- src/transform.py — transformação
+- src/quality.py — checagens de qualidade
+- src/load.py — persistência
+- data/ — CSVs brutos, Parquet e SQLite
+- requirements.txt — dependências
 
-## How to Run
+## Boas práticas e melhorias sugeridas
 
-### 1. Create virtual environment
+- Adicionar orquestração (Airflow/Prefect) para execuções agendadas
+- Implementar ingestões incrementais e versionamento de dados
+- Expansão das checagens de qualidade e testes automatizados
+- Substituir SQLite por data warehouse em ambientes de produção
 
-```
-python -m venv venv
-venv\Scripts\activate
-```
+## Licença
 
-### 2. Install dependencies
-
-```
-pip install -r requirements.txt
-```
-
-### 3. Run pipeline
-
-```
-python main.py
-```
-
-### 4. Run dashboard
-
-```
-streamlit run app/app.py
-```
-
----
-
-## Data Quality Checks
-
-The pipeline includes basic validation rules:
-
-- Dataset must not be empty
-- Required columns must exist
-- Null percentage threshold validation
-
-These checks help ensure data reliability before transformation.
-
----
-
-## Design Decisions
-
-- **SQLite** was chosen for simplicity and local analytical storage
-- **Layered structure** improves readability and scalability
-- **Batch processing** ensures reproducibility
-- **Parquet format** used for efficient storage in processed layer
-
----
-
-## Trade-offs
-
-- Not designed for large-scale data processing
-- No orchestration tool (e.g., Airflow)
-- No incremental data loading
-- Limited data quality rules
-
----
-
-## Future Improvements
-
-- Add orchestration layer (Airflow or similar)
-- Migrate storage to cloud (S3 + Athena / BigQuery)
-- Implement incremental loads
-- Enhance data quality validation
-- Improve Streamlit dashboard with filters and metrics
-
----
-
-## Notes
-
-- Data is not versioned in the repository
-- The pipeline must be executed to generate local data files
-
----
-
-## Purpose
-
-This project is intended as a practical demonstration of data engineering fundamentals, focusing on clarity, structure, and reproducibility rather than complexity.
+MIT

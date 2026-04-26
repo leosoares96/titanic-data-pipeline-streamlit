@@ -51,12 +51,11 @@ Fluxo: Data Source → src.extract → data/raw → src.transform → src.qualit
 - data/ — CSVs brutos, Parquet e SQLite
 - requirements.txt — dependências
 
-## Boas práticas e melhorias sugeridas
+## Dashboard Preview
 
-- Adicionar orquestração (Airflow/Prefect) para execuções agendadas
-- Implementar ingestões incrementais e versionamento de dados
-- Expansão das checagens de qualidade e testes automatizados
-- Substituir SQLite por data warehouse em ambientes de produção
+![Dashboard](assets/dashboard-streamlit-titanic.PNG)
+
+Este dashboard demonstra a camada de consumo do pipeline, onde os dados processados armazenados no SQLite são consultados e visualizados utilizando o Streamlit.
 
 ## Licença
 

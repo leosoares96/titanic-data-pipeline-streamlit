@@ -1,4 +1,4 @@
-# Arquitetura de Dados — Titanic Data Pipeline (completo)
+# Arquitetura de Dados — Titanic Data Pipeline
 
 ## 1. Visão Geral
 

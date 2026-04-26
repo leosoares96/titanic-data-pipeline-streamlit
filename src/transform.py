@@ -12,4 +12,7 @@ def transform(df):
     # padronização
     df.columns = [c.lower() for c in df.columns]
     
+    # salvar camada processed
+    df.to_parquet("data/processed/titanic_clean.parquet", index=False)
+    
     return df

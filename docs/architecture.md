@@ -31,3 +31,23 @@ SQLite database used as analytical storage
 Streamlit dashboard for data consumption
 
 ## Data Flow
+
+`Data Source → Extract → Raw → Transform → SQLite → Streamlit`
+
+## Design Decisions
+
+- SQLite for simplicity and local analytics
+- Separation of layers for modularity
+- Batch processing for reproducibility
+
+## Trade-offs
+
+- Not scalable (local execution)
+- No orchestration tool
+- No incremental loads
+
+## Future Improvements
+
+- Replace SQLite with cloud data warehouse
+- Add orchestration (Airflow)
+- Implement data quality checks

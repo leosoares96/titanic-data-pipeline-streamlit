@@ -1,7 +1,11 @@
 import pandas as pd
 
-def extract():
-    url = "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
-    df = pd.read_csv(url)
-    df.to_csv("data/raw/titanic.csv", index=False)
+def extract(config, logger):
+    logger.info("Starting extraction")
+
+    df = pd.read_csv(config["data_source"])
+    df.to_csv(config["paths"]["raw"], index=False)
+
+    logger.info(f"Raw data saved to {config['paths']['raw']}")
+    
     return df

@@ -1,0 +1,9 @@
+data_source: 'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'
+
+paths:
+  raw: 'data/raw/titanic.csv'
+  processed: 'data/processed/titanic_clean.parquet'
+
+database:
+  path: 'data/titanic.db'
+  table: 'passengers'

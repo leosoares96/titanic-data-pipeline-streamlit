@@ -1,18 +1,22 @@
-def transform(df):
-    # remover colunas inúteis
+from src.quality import run_quality_checks
+
+def transform(df, config, logger):
+    logger.info("Starting transformation")
+
+    # roda qualidade ANTES
+    run_quality_checks(df, logger)
+
     df = df.drop(columns=["Name", "Ticket", "Cabin"])
-    
-    # tratar nulos
+
     df["Age"] = df["Age"].fillna(df["Age"].median())
     df["Embarked"] = df["Embarked"].fillna("Unknown")
-    
-    # feature engineering
+
     df["is_child"] = df["Age"] < 12
-    
-    # padronização
+
     df.columns = [c.lower() for c in df.columns]
-    
-    # salvar camada processed
-    df.to_parquet("data/processed/titanic_clean.parquet", index=False)
-    
+
+    df.to_parquet(config["paths"]["processed"], index=False)
+
+    logger.info(f"Processed data saved to {config['paths']['processed']}")
+
     return df

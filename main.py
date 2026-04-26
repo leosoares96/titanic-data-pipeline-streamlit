@@ -1,8 +1,8 @@
 from src.extract import extract
 from src.transform import transform
 from src.load import load
-from src.config import load_config
-from src.logger import get_logger
+from src.utils.config import load_config
+from src.utils.logger import get_logger
 
 def run():
     config = load_config()

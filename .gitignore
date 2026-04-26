@@ -1,34 +1,42 @@
-# Terraform
-*.tfstate
-*.tfstate.*
-.terraform/
-terraform.tfvars
-crash.log
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
-.terraform.lock.hcl
+# Python
 
-# AWS CLI
-.aws/
-
-# Python (se houver scripts em shared-modules)
-*__pycache__/
-*.pyc
+**pycache**/
+*.py[cod]
 *.pyo
 *.pyd
-*.egg
-*.egg-info/
-dist/
-build/
-*.pytest_cache/
 
-# IDEs
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
+# Virtual Environment
+
+venv/
+.env/
+
+# Data files
+
+data/raw/
+data/processed/
+*.db
 
 # Logs
+
 *.log
+
+# Jupyter
+
+.ipynb_checkpoints/
+
+# VSCode
+
+.vscode/
+
+# OS
+
+.DS_Store
+Thumbs.db
+
+# Streamlit
+
+.streamlit/
+
+# Temporary files
+
+*.tmp

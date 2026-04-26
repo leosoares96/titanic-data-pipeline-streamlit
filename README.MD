@@ -48,6 +48,7 @@ Processed Data (Parquet)
 - SQLite
 - Streamlit
 - PyArrow
+- plotly
 
 ---
 
